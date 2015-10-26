@@ -4,14 +4,16 @@
 
 参数名|类型|描述
 ----|----|----  
-title|CHAR(45)|文章标题
+title|String|文章标题
 content|Text|文章内容 
-category|Integer|文章类型id
+category_id|Integer|文章类型id
  
 
 ### 返回值:
 
-无
+类型|描述
+---|---
+int|描述函数执行成功与否的状态码，1为成功，0为不成功
 
 ### 描述：  
 
@@ -22,11 +24,13 @@ category|Integer|文章类型id
 ### 参数：  
 参数名|类型|描述
 ----|----|----
-id|Integer|要删除文章的id
+article_id|Integer|要删除文章的id
 
 ### 返回值  
   
-无
+类型|描述
+---|---
+int|描述函数执行成功与否的状态码，1为成功，0为不成功
   
 ### 描述：  
   
@@ -38,14 +42,16 @@ id|Integer|要删除文章的id
 
 参数名|类型|描述
 ----|----|---- 
-id|Interger|文章id 
-title|CHAR(45)|文章标题
+article_id|Interger|文章id 
+title|String|文章标题
 content|Text|文章内容
-category|Integer|文章类型id  
+category_id|Integer|文章类型id  
 
 ### 返回值:
 
-无
+类型|描述
+---|---
+int|描述函数执行成功与否的状态码，1为成功，0为不成功
 
 ### 描述：  
 
@@ -57,7 +63,7 @@ category|Integer|文章类型id
 
 参数名|类型|描述
 ----|----|---- 
-id|Interger|文章id  
+article_id|Interger|文章id  
 
 ### 返回值:
 

@@ -2,83 +2,77 @@
 # -*- coding: utf-8 -*-
 
 '''The module request to set uo cache and ORM'''
-from db import  DB_Session, Article, Category
+
 import redis_set
+import models
 
-
-def create_new_article(title, content, category):
+def create_new_article(title, content, category_id):
     '''Cerate new article
 
     :param title: the title of the article
     :param contnet: the content of the article
-    :param category: the category id of the article
+    :param category_id: the category id of the article
+    :returns: the status code whether the article create success
     '''
 
-    session = DB_Session()
-    article1 = Article(title=title, content=content, category=category)
-    session.add(article1)
-    redis_set.create_article_in_cache(article1)
-    session.commit()
-    session.close()
+    return models.create_article(title, content, category_id)
 
-def delete_article(id):
+
+
+def delete_article(article_id):
     '''Delete article
 
-    :param id: the id of the article
+    :param article_id: the id of the article
+    :returns: the status code whether the article delete success
     '''
 
-    session = DB_Session()
-    session.query(Article).filter(Article.id == id).delete()
-    redis_set.delete_article_in_cache(id)
-    session.commit()
-    session.close()
+    if models.delete_article(article_id):
+        if redis_set.is_article_in_cache(article_id):
+            redis_set.delete_article_in_cache(id)
+        return 1
+    else:
+        return 0
 
-def modify_article(id, title, content, category):
+def modify_article(article_id, title, content, category_id):
     '''Modify article
 
-    :param id: the id of the article
+    :param article_id: the id of the article
     :param title: the title of the article
     :param contnet: the content of the article
-    :param category: the category id of the article
+    :param category_id: the category id of the article
+    :returns: the status code whether the article modify success
     '''
 
-    session = DB_Session()
-    session.query(Article).filter(Article.id == id).update(
-        {
-            Article.title: title,
-            Article.content: content,
-            Article.category: category
-        })
-    article1 = session.query(Article).filter(Article.id == id).first()
-    redis_set.update_article_in_cache(article1)
-    session.commit()
-    session.close()
+    article = models.modify_article(article_id, title, content, category_id)
+    if article is not None:
+        redis_set.update_article_in_cache(article)
+        print 'success'
+        return 1
+    else:
+        print 'modify fail'
+        return 0
 
-def read_article(id):
+def read_article(article_id):
     '''Read article
 
     :param id: the id of the article
     '''
 
-    if redis_set.is_article_in_cache(id):
-        redis_set.read_article_from_cache(id)
+    if redis_set.is_article_in_cache(article_id):
+        redis_set.read_article_from_cache(article_id)
     else:
-        session = DB_Session()
-        article_read = session.query(Article).filter(Article.id == id).first()
-        redis_set.create_article_in_cache(article_read)
-        print article_read.content
-        session.close()
+        article = models.read_article(article_id)
+        if article is not None:
+            redis_set.create_article_in_cache(article)
+        else:
+            print "read error"
+
+
 
 def show_article_name_with_id():
     '''Show all article name with id'''
-    session = DB_Session()
-    query = session.query(Article).all()
-    for article1 in query:
-        print(article1.id, article1.title)
+    models.show_article_name_with_id()
 
 def show_all_category_and_id():
     '''Show all category name with id'''
-    session = DB_Session()
-    query = session.query(Category).all()
-    for category1 in query:
-        print(category1.id, category1.category_name)
+    models.show_all_category_and_id()

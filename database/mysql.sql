@@ -30,7 +30,7 @@ CREATE TABLE `article` (
   `modify_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `category_idx` (`category`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -39,7 +39,6 @@ CREATE TABLE `article` (
 
 LOCK TABLES `article` WRITE;
 /*!40000 ALTER TABLE `article` DISABLE KEYS */;
-INSERT INTO `article` VALUES (00000000002,'sqlalchemy2',1,'sqlalchemy的基本用法和注意事项\n        declarative_base() 创建了一个 BaseModel 类，这个类的子类可以自动与一个表关联。\n        以 User 类为例，它的 __tablename__ 属性就是数据库中该表的名称，它有 id 和 name 这两个字段，分别为整型和 30 个定长字符。\n        Column 还有一些其他的参数，我就不解释了。\n        最后，BaseModel.metadata.create_all(engine) 会找到 BaseModel 的所有子类，并在数据库中建立这些表；drop_all() 则是删除这些表。\n\n',NULL),(00000000003,'hello python',1,'print(\'hello world\')',NULL),(00000000004,'hello python cookbook',1,'；吖吖；啊；啊；啊；啊；反对建立双方介绍了对方家里氮磷钾肥你的看守内阁看能否改变风格博客的菲尼克斯短发女生看到妇女舒服的纳斯达克',NULL),(00000000005,'test delete',2,'test delete',NULL);
 /*!40000 ALTER TABLE `article` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -63,7 +62,6 @@ CREATE TABLE `category` (
 
 LOCK TABLES `category` WRITE;
 /*!40000 ALTER TABLE `category` DISABLE KEYS */;
-INSERT INTO `category` VALUES (1,'wenxue'),(2,'shuxue');
 /*!40000 ALTER TABLE `category` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -76,4 +74,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-10-25 22:02:40
+-- Dump completed on 2015-10-26 10:48:48

@@ -22,8 +22,8 @@ while True:
         title = raw_input('plesae input title of the article: ')
         content = raw_input('pleasse input the content of the article: ')
         ams.show_all_category_and_id()
-        category = raw_input('pleasw choose the category for che article: ')
-        ams.create_new_article(title, content, category)
+        category_id = raw_input('pleasw choose the category for che article: ')
+        ams.create_new_article(title, content, category_id)
         print 'success'
     elif instruct == '2':
         #调用delete_article删除文章
@@ -34,16 +34,15 @@ while True:
     elif instruct == '3':
         #调用modify_article修改文章
         ams.show_article_name_with_id()
-        id = raw_input('please input the id of the article you want to modify: ')
-        title = raw_input('please input new title')
+        article_id = raw_input('please input the id of the article you want to modify: ')
+        title = raw_input('please input new title: ')
         content = raw_input('please input new connent: ')
         ams.show_all_category_and_id()
-        category = raw_input('pleasw choose the category for che article: ')
-        ams.modify_article(id, title, content, category)
-        print 'success'
+        category_id = raw_input('pleasw choose the category for che article: ')
+        ams.modify_article(article_id, title, content, category_id)
     elif instruct == '4':
         #调用read_article阅读文章
-        ams.show_artile_name_with_id()
+        ams.show_article_name_with_id()
         article_id = raw_input('please input the id of the article you want to read: ')
         ams.read_article(article_id)
         print 'success'
